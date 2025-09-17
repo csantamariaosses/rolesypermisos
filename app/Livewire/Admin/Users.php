@@ -25,6 +25,8 @@ class Users extends Component
     public $permisosCheckbox = [];
     public $rolesDB = [];
     public $i=0;
+    public $checkBoxCambiaPassword = false;
+    public $isDisabled = true;
     
     public function mount()
     {
@@ -84,6 +86,14 @@ class Users extends Component
         $usuario->save();
         //$role = Role::find($this->rolSelected);
 
+        if( $this->isDisabled == false ){ 
+                $this->validate([
+                    'password' => 'required|string|min:7',
+                ]);
+                $usuario->password = bcrypt($this->password);
+                $usuario->save();   
+        }
+        
         //Asignar permisos
         foreach($this->permisosCheckbox as $permisoId){
             $this->permisosCheckbox[$i] = (int) $this->permisosCheckbox[$i];    
@@ -100,12 +110,7 @@ class Users extends Component
             $usuario->assignRole( $rolName->name);
             $i++;
         }
-        /*
-        dd( $this->rolesCheckbox);
-        $rolName = Role::find($this->rolesCheckbox);
-        $usuario->assignRole('admin'); 
-        //$usuario->syncRoles( $this->rolesCheckbox);
-        */
+
         $this->limpiarCampos();
         $this->dispatch('ActualizadoRegistroModal');
     }
@@ -116,6 +121,11 @@ class Users extends Component
         $this->nombre = "";
         $this->rol = "";
 
+    }
+
+
+    public function activarCambioPassword(){
+        $this->isDisabled = !$this->isDisabled;
     }
 
     public function render()
@@ -131,6 +141,6 @@ class Users extends Component
             'roles' => $this->roles, 
             'selectedRoles' => $this->selectedRoles,
             'rolSelected' => $this->rolSelected,
-            'permissions' => $this->permissions ])->layout('components.layouts.admin');
+            'permissions' => $this->permissions ])->layout('components.layouts.app');
     }
 }

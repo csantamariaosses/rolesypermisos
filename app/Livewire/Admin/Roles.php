@@ -109,6 +109,6 @@ class Roles extends Component
     {
         
         $this->registros = Role::all();
-        return view('livewire.admin.roles', [ 'registros' => $this->registros ])->layout('components.layouts.admin');
+        return view('livewire.admin.roles', [ 'registros' => $this->registros ])->layout('components.layouts.app');
     }
 }

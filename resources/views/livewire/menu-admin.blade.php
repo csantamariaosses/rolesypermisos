@@ -31,6 +31,12 @@
                 </ul>
                 </li>
 
+                 @if(session()->has('usuario'))
+                <li class="nav-item">
+                <a class="nav-link" href="/cambioPassword" wire:navigate>Cambio de Contraseña</a>
+                </li>
+                @endif
+
                 @if(session()->has('usuario'))
                 <li class="nav-item">
                 <a class="nav-link" href="/salir" wire:navigate>Salir</a>

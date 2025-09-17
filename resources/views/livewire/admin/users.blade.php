@@ -110,6 +110,10 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" placeholder="email" wire:model.lazy="email">
+                    </div> 
+                    <div class="mb-3">
+                        <input type="checkbox" wire:click="activarCambioPassword"> Cambiar Password
+                        <input type="password" class="form-control" id="password" placeholder="******************" wire:model.lazy="password" @if($isDisabled) disabled @endif>
                     </div>                                                                  
                     <div class="mb-3">
                         <p>Permisos Directos</p>

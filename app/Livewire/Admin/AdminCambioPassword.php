@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Users;
+namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 
 
-class CambioPassword extends Component
+class AdminCambioPassword extends Component
 {
 
     #[Session]
@@ -20,7 +20,8 @@ class CambioPassword extends Component
     public $passwordActual;
     public $passwordNueva;
     public $passwordNuevaConfirm;
-    public $messages = [];
+    public $showCambioPassword = false;
+
 
     public function mount()
     {
@@ -34,30 +35,12 @@ class CambioPassword extends Component
         //dd("cambioPassword");
 
         
-        $this->validate(
-            ['passwordActual' => 'required'],
-            [
-                'passwordActual.required' => 'La Password actual es requerida.',
-            ],
-            ['passwordNueva' => 'required|min:6'],
-            [
-                'passwordNueva.required' => 'La Password nueva es requerida.',
-                'passwordNueva.min' => 'La Password nueva debe tener al menos 6 caracteres.',
-            ],
-            ['passwordNuevaConfirm' => 'required|min:6|same:passwordNueva']
-        );
+        $this->validate([
+            'passwordActual' => 'required',
+            'passwordNueva' => 'required|min:6',
+            'passwordNuevaConfirm' => 'required|min:6|same:passwordNueva'
+        ]);
 
-
-        $this->messages = [
-            'passwordActual.required' => 'La Password actual es requerida.',
-            'passwordNueva.required' => 'La Password nueva es requerida.',
-            'passwordNueva.min' => 'La Password nueva debe tener al menos 6 caracteres.',
-            'passwordNuevaConfirm.required' => 'La confirmación de la Password nueva es requerida.',
-            'passwordNuevaConfirm.min' => 'La confirmación de la Password nueva debe tener al menos 6 caracteres.',
-            'passwordNuevaConfirm.same' => 'Las Passwords nuevas no coinciden.',
-        ];
-        
-        //dd("validado");
         // Aquí iría la lógica para cambiar la contraseña del usuario
         // Por ejemplo, verificar que la contraseña actual es correcta,
         // y luego actualizarla con la nueva contraseña.
@@ -90,11 +73,13 @@ class CambioPassword extends Component
     {
 
         //dd( Session::get('usuario') );
+
         $this->email = Session::get('usuario');
+        $this->showCambioPassword = true;
 
         //dd($this->email);
         //$this->email = $this->usuario->email;
         //$this->user = $this->usuario->name;
-        return view('livewire.users.cambio-password');
+        //return view('livewire.admin.admin-cambio-password')->layout('components.layouts.admin');
     }
 }

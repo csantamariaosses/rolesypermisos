@@ -11,6 +11,7 @@ use App\Livewire\Users\Logout;
 //use App\Livewire\Admin\Users;
 use App\Livewire\Users\Users;
 use App\Livewire\Admin\Roles;
+use App\Livewire\Users\CambioPassword;
 
 
 /*
@@ -46,7 +47,9 @@ Route::get('/login', Login::class)->name('login');
 Route::get('/logout', Logout::class)->name('logout');
 Route::get('/registro', Registro::class);
 Route::get('/users', Users::class)->name('users')->middleware('auth');
-Route::get("/cambioPassword", \App\Livewire\Users\CambioPassword::class)->name('cambioPassword')->middleware('auth');
+Route::get("/cambioPassword", CambioPassword::class)->name('cambioPassword')->middleware('auth');
 //Route::get('/roles', \App\Livewire\Admin\Roles::class)->name('admin.roles')->middleware('auth');
 
-
+Route::get("/dashboard", \App\Livewire\Dashboard\Index::class)->name('dashboard')->middleware('auth');
+Route::get("/dashboard/crear", \App\Livewire\Dashboard\Crear::class)->name('dashboard.crear')->middleware('auth');
+//Route::get("/dashboard.ver", \App\Livewire\Dashboard\Ver::class)->name('dashboard.ver')->middleware('auth');

@@ -11,9 +11,33 @@
                 <a class="nav-link active" aria-current="page" href="/home" wire:navigate>Home</a>
                 </li>
 
+                @if( session()->has('usuario') and session('roles')->contains('administrador') )
+                <li class="nav-item">
+                <a class="nav-link" href="/admin/users" wire:navigate>Usuarios</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/admin/permissions" wire:navigate>Permisos</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/admin/roles" wire:navigate>Roles</a>
+                </li>
+                @endif
+
                 @if(!session()->has('usuario'))
                 <li class="nav-item">
                 <a class="nav-link" href="/login" wire:navigate>Login</a>
+                </li>
+                @endif
+
+                @if( session()->has('usuario') and session('roles')->contains('dashboard') )
+                <li class="nav-item">
+                <a class="nav-link" href="/dashboard/crear" wire:navigate>Crear Dashboard</a>
+                </li>
+                @endif
+
+                @if( session()->has('usuario') and session('roles')->contains('usuario') )   
+                <li class="nav-item">
+                <a class="nav-link" href="/dashboard" wire:navigate>Ver Dashboard</a>
                 </li>
                 @endif
                

@@ -28,6 +28,9 @@ class Login extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             Session::put('usuario', Auth::user()->email);
+            Session::put('roles', Auth::user()->getRoleNames());
+            Session::put('permisos', Auth::user()->getAllPermissions());
+
 
             if (strstr(Auth::user()->email, "admin")) {
                 return redirect()->route('admin.home');

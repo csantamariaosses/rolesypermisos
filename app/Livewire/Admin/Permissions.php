@@ -10,7 +10,7 @@ class Permissions extends Component
 
     public $_id;
     public $name;
-    public $guard_name = 'admin';
+    public $guard_name = 'web';
 
 
     public function store(){
@@ -74,8 +74,8 @@ class Permissions extends Component
 
     public function render()
     {
-        $registros = Permission::all();
-        return view('livewire.admin.permissions', compact('registros') )->layout('components.layouts.admin');
+        $registros = Permission::orderBy('name')->get();
+        return view('livewire.admin.permissions', compact('registros') )->layout('components.layouts.app');
         
     }
 }

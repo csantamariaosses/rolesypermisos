@@ -12,6 +12,9 @@ class Logout extends Component
     public function mount()
     {
         Session::forget('usuario');
+        Session::forget('roles');
+        Session::forget('permisos');    
+
         Auth::logout();
         
     }
