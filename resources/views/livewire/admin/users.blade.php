@@ -11,6 +11,12 @@
         <div class="col-3" style="background-color: lightgreen"></div>
         <div class="col-6">
             <button class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#NuevoRegistroModal">Nuevo Usuario</button>   
+            @if (session('message'))
+                <div class="alert alert-success">
+                   {{ session('message') }}
+                </div>
+            @endif
+
         </div>
         <div class="col-3" style="background-color: lightgreen"></div>
     </div>
@@ -167,4 +173,34 @@
         </div> <!-- Modal dialog -->
     </div>   <!-- Modal -->
     <!-- Fin Modal Edita -->
+
+
+    <!-- Modal Aviso-->
+    <div class="modal fade" id="AvisoModal" wire:ignore.self tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" placeholder="nombre" wire:model.lazy="name" required>
+                        @error('name')
+                            <span style="color:red">{{ $message}}</span>
+                        @enderror
+                    </div>        
+                </div>
+
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary"   data-bs-dismiss="modal" wire:click="store">Aceptar</button>
+                </div>
+            </div> <!-- Modal content -->
+        </div> <!-- Modal dialog -->
+    </div>   <!-- Fin Modal Aviso -->
+
 </div>

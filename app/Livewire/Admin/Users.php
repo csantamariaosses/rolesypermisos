@@ -48,6 +48,7 @@ class Users extends Component
         ]);
         $this->limpiarCampos();
         $this->dispatch('NuevoRegistroModal');
+        session()->flash('message', 'Usuario creado exitosamente.');
     }
 
 
@@ -112,7 +113,8 @@ class Users extends Component
         }
 
         $this->limpiarCampos();
-        $this->dispatch('ActualizadoRegistroModal');
+        session()->flash('message', 'Usuario actualizado exitosamente.');
+
     }
 
 
@@ -133,8 +135,6 @@ class Users extends Component
         $this->usuarios = User::all();
         $this->roles = Role::all();
         $this->permissions = Permission::all();
-        //$this->selectedRoles = $this->usuario->roles()->pluck('id')->toArray();
-        //$this->selectedPermissions = $this->usuario->permissions()->pluck('id')->toArray();
 
         return view('livewire.admin.users', [ 
             'usuarios' => $this->usuarios, 
